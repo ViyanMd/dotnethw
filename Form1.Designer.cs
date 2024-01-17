@@ -35,8 +35,16 @@
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormMain";
-            Text = "Application";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "X: 0 ; Y: 0";
+            Paint += onLoadPaint;
+            MouseClick += onMouseClick;
+            MouseDown += onMouseDown;
+            MouseMove += onMouseMove;
             ResumeLayout(false);
         }
 
