@@ -28,18 +28,336 @@
         /// </summary>
         private void InitializeComponent()
         {
+            tbAnalitics = new TabPage();
+            tpCashier = new TabPage();
+            btPrintOrder = new Button();
+            Items = new ListBox();
+            btDeleteItem = new Button();
+            btEditItem = new Button();
+            btAddItem = new Button();
+            groupBox1 = new GroupBox();
+            lbCurrency = new Label();
+            dateTimePicker = new DateTimePicker();
+            udQuantity = new NumericUpDown();
+            lbDate = new Label();
+            lbTotalPrice = new Label();
+            tbTotalPrice = new TextBox();
+            tbPricePerUnit = new TextBox();
+            lbPricePerUnit = new Label();
+            lbQuantity = new Label();
+            lbName = new Label();
+            tbName = new TextBox();
+            lbDescription = new Label();
+            tbDescription = new TextBox();
+            TabPages = new TabControl();
+            tbOrders = new TabPage();
+            tpCashier.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)udQuantity).BeginInit();
+            TabPages.SuspendLayout();
             SuspendLayout();
+            // 
+            // tbAnalitics
+            // 
+            tbAnalitics.Location = new Point(4, 29);
+            tbAnalitics.Name = "tbAnalitics";
+            tbAnalitics.Padding = new Padding(3);
+            tbAnalitics.Size = new Size(828, 428);
+            tbAnalitics.TabIndex = 1;
+            tbAnalitics.Text = "Analitics";
+            tbAnalitics.UseVisualStyleBackColor = true;
+            // 
+            // tpCashier
+            // 
+            tpCashier.Controls.Add(btPrintOrder);
+            tpCashier.Controls.Add(Items);
+            tpCashier.Controls.Add(btDeleteItem);
+            tpCashier.Controls.Add(btEditItem);
+            tpCashier.Controls.Add(btAddItem);
+            tpCashier.Controls.Add(groupBox1);
+            tpCashier.Location = new Point(4, 29);
+            tpCashier.Name = "tpCashier";
+            tpCashier.Padding = new Padding(3);
+            tpCashier.Size = new Size(828, 428);
+            tpCashier.TabIndex = 0;
+            tpCashier.Text = "Cashier";
+            tpCashier.UseVisualStyleBackColor = true;
+            // 
+            // btPrintOrder
+            // 
+            btPrintOrder.Enabled = false;
+            btPrintOrder.FlatAppearance.BorderColor = Color.Silver;
+            btPrintOrder.FlatStyle = FlatStyle.Flat;
+            btPrintOrder.Font = new Font("Segoe UI Historic", 20.2909088F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btPrintOrder.Location = new Point(6, 255);
+            btPrintOrder.Name = "btPrintOrder";
+            btPrintOrder.Size = new Size(468, 165);
+            btPrintOrder.TabIndex = 5;
+            btPrintOrder.Text = "Print Order";
+            btPrintOrder.UseVisualStyleBackColor = true;
+            btPrintOrder.Click += onPrintOrder;
+            // 
+            // Items
+            // 
+            Items.BackColor = SystemColors.Menu;
+            Items.BorderStyle = BorderStyle.None;
+            Items.Cursor = Cursors.Hand;
+            Items.Font = new Font("Segoe UI Historic", 7.85454559F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Items.FormattingEnabled = true;
+            Items.ItemHeight = 15;
+            Items.Location = new Point(480, 15);
+            Items.Name = "Items";
+            Items.Size = new Size(345, 405);
+            Items.TabIndex = 4;
+            // 
+            // btDeleteItem
+            // 
+            btDeleteItem.BackColor = Color.Tomato;
+            btDeleteItem.FlatAppearance.BorderSize = 0;
+            btDeleteItem.FlatAppearance.MouseDownBackColor = Color.Tomato;
+            btDeleteItem.FlatStyle = FlatStyle.Flat;
+            btDeleteItem.Font = new Font("Segoe UI Historic", 9.818182F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btDeleteItem.Location = new Point(327, 206);
+            btDeleteItem.Name = "btDeleteItem";
+            btDeleteItem.Size = new Size(147, 43);
+            btDeleteItem.TabIndex = 3;
+            btDeleteItem.Text = "Delete Item";
+            btDeleteItem.UseVisualStyleBackColor = false;
+            btDeleteItem.Click += onDeleteButton;
+            // 
+            // btEditItem
+            // 
+            btEditItem.BackColor = Color.SkyBlue;
+            btEditItem.FlatAppearance.BorderSize = 0;
+            btEditItem.FlatAppearance.MouseDownBackColor = Color.SkyBlue;
+            btEditItem.FlatStyle = FlatStyle.Flat;
+            btEditItem.Font = new Font("Segoe UI Historic", 9.818182F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btEditItem.Location = new Point(166, 206);
+            btEditItem.Name = "btEditItem";
+            btEditItem.Size = new Size(147, 43);
+            btEditItem.TabIndex = 2;
+            btEditItem.Text = "Edit Item";
+            btEditItem.UseVisualStyleBackColor = false;
+            btEditItem.Click += onEditItem;
+            // 
+            // btAddItem
+            // 
+            btAddItem.BackColor = Color.LightGreen;
+            btAddItem.FlatAppearance.BorderSize = 0;
+            btAddItem.FlatAppearance.MouseDownBackColor = Color.LightGreen;
+            btAddItem.FlatStyle = FlatStyle.Flat;
+            btAddItem.Font = new Font("Segoe UI Historic", 9.818182F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btAddItem.Location = new Point(6, 206);
+            btAddItem.Name = "btAddItem";
+            btAddItem.Size = new Size(147, 43);
+            btAddItem.TabIndex = 1;
+            btAddItem.Text = "Add Item";
+            btAddItem.UseVisualStyleBackColor = false;
+            btAddItem.Click += onAddItem;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(lbCurrency);
+            groupBox1.Controls.Add(dateTimePicker);
+            groupBox1.Controls.Add(udQuantity);
+            groupBox1.Controls.Add(lbDate);
+            groupBox1.Controls.Add(lbTotalPrice);
+            groupBox1.Controls.Add(tbTotalPrice);
+            groupBox1.Controls.Add(tbPricePerUnit);
+            groupBox1.Controls.Add(lbPricePerUnit);
+            groupBox1.Controls.Add(lbQuantity);
+            groupBox1.Controls.Add(lbName);
+            groupBox1.Controls.Add(tbName);
+            groupBox1.Controls.Add(lbDescription);
+            groupBox1.Controls.Add(tbDescription);
+            groupBox1.Location = new Point(6, 6);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(468, 194);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Item";
+            // 
+            // lbCurrency
+            // 
+            lbCurrency.AutoSize = true;
+            lbCurrency.Location = new Point(199, 126);
+            lbCurrency.Name = "lbCurrency";
+            lbCurrency.Size = new Size(40, 20);
+            lbCurrency.TabIndex = 13;
+            lbCurrency.Text = "UAH";
+            // 
+            // dateTimePicker
+            // 
+            dateTimePicker.Font = new Font("Segoe UI Historic", 9.818182F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateTimePicker.Location = new Point(91, 156);
+            dateTimePicker.Name = "dateTimePicker";
+            dateTimePicker.Size = new Size(268, 27);
+            dateTimePicker.TabIndex = 12;
+            // 
+            // udQuantity
+            // 
+            udQuantity.Enabled = false;
+            udQuantity.Location = new Point(91, 90);
+            udQuantity.Name = "udQuantity";
+            udQuantity.Size = new Size(102, 27);
+            udQuantity.TabIndex = 11;
+            udQuantity.ValueChanged += onQuantityChange;
+            // 
+            // lbDate
+            // 
+            lbDate.AutoSize = true;
+            lbDate.Location = new Point(0, 161);
+            lbDate.Name = "lbDate";
+            lbDate.Size = new Size(41, 20);
+            lbDate.TabIndex = 10;
+            lbDate.Text = "Date";
+            // 
+            // lbTotalPrice
+            // 
+            lbTotalPrice.AutoSize = true;
+            lbTotalPrice.Location = new Point(0, 125);
+            lbTotalPrice.Name = "lbTotalPrice";
+            lbTotalPrice.Size = new Size(79, 20);
+            lbTotalPrice.TabIndex = 9;
+            lbTotalPrice.Text = "Total Price";
+            // 
+            // tbTotalPrice
+            // 
+            tbTotalPrice.BackColor = SystemColors.ButtonHighlight;
+            tbTotalPrice.Enabled = false;
+            tbTotalPrice.Location = new Point(91, 123);
+            tbTotalPrice.Name = "tbTotalPrice";
+            tbTotalPrice.ReadOnly = true;
+            tbTotalPrice.Size = new Size(102, 27);
+            tbTotalPrice.TabIndex = 8;
+            // 
+            // tbPricePerUnit
+            // 
+            tbPricePerUnit.Enabled = false;
+            tbPricePerUnit.Location = new Point(313, 89);
+            tbPricePerUnit.Name = "tbPricePerUnit";
+            tbPricePerUnit.Size = new Size(149, 27);
+            tbPricePerUnit.TabIndex = 7;
+            tbPricePerUnit.TextChanged += onPricePerUnitChange;
+            // 
+            // lbPricePerUnit
+            // 
+            lbPricePerUnit.AutoSize = true;
+            lbPricePerUnit.Location = new Point(209, 92);
+            lbPricePerUnit.Name = "lbPricePerUnit";
+            lbPricePerUnit.Size = new Size(98, 20);
+            lbPricePerUnit.TabIndex = 6;
+            lbPricePerUnit.Text = "Price per Unit";
+            // 
+            // lbQuantity
+            // 
+            lbQuantity.AutoSize = true;
+            lbQuantity.Location = new Point(0, 92);
+            lbQuantity.Name = "lbQuantity";
+            lbQuantity.Size = new Size(65, 20);
+            lbQuantity.TabIndex = 5;
+            lbQuantity.Text = "Quantity";
+            // 
+            // lbName
+            // 
+            lbName.AutoSize = true;
+            lbName.Location = new Point(0, 28);
+            lbName.Name = "lbName";
+            lbName.Size = new Size(49, 20);
+            lbName.TabIndex = 3;
+            lbName.Text = "Name";
+            // 
+            // tbName
+            // 
+            tbName.Location = new Point(91, 25);
+            tbName.Name = "tbName";
+            tbName.Size = new Size(371, 27);
+            tbName.TabIndex = 2;
+            tbName.TextChanged += onNameChange;
+            // 
+            // lbDescription
+            // 
+            lbDescription.AutoSize = true;
+            lbDescription.Location = new Point(0, 60);
+            lbDescription.Name = "lbDescription";
+            lbDescription.Size = new Size(85, 20);
+            lbDescription.TabIndex = 1;
+            lbDescription.Text = "Description";
+            // 
+            // tbDescription
+            // 
+            tbDescription.Location = new Point(91, 57);
+            tbDescription.Name = "tbDescription";
+            tbDescription.Size = new Size(371, 27);
+            tbDescription.TabIndex = 0;
+            // 
+            // TabPages
+            // 
+            TabPages.Controls.Add(tpCashier);
+            TabPages.Controls.Add(tbOrders);
+            TabPages.Controls.Add(tbAnalitics);
+            TabPages.Cursor = Cursors.Hand;
+            TabPages.Font = new Font("Segoe UI Symbol", 9.818182F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            TabPages.Location = new Point(-4, -1);
+            TabPages.Multiline = true;
+            TabPages.Name = "TabPages";
+            TabPages.SelectedIndex = 0;
+            TabPages.Size = new Size(836, 461);
+            TabPages.TabIndex = 0;
+            TabPages.Tag = "";
+            // 
+            // tbOrders
+            // 
+            tbOrders.Font = new Font("Segoe UI Historic", 9.818182F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbOrders.Location = new Point(4, 29);
+            tbOrders.Name = "tbOrders";
+            tbOrders.Size = new Size(828, 428);
+            tbOrders.TabIndex = 2;
+            tbOrders.Text = "Orders";
+            tbOrders.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(832, 456);
+            Controls.Add(TabPages);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "FormMain";
             Text = "Application";
+            tpCashier.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)udQuantity).EndInit();
+            TabPages.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
+
+        private TabPage tbAnalitics;
+        private TabPage tpCashier;
+        private TabPage tbOrders;
+        private ListBox Items;
+        private Button btDeleteItem;
+        private Button btEditItem;
+        private Button btAddItem;
+        private GroupBox groupBox1;
+        private Label lbCurrency;
+        private DateTimePicker dateTimePicker;
+        private NumericUpDown udQuantity;
+        private Label lbDate;
+        private Label lbTotalPrice;
+        private TextBox tbTotalPrice;
+        private TextBox tbPricePerUnit;
+        private Label lbPricePerUnit;
+        private Label lbQuantity;
+        private Label lbName;
+        private TextBox tbName;
+        private Label lbDescription;
+        private TextBox tbDescription;
+        private TabControl TabPages;
+        private Button btPrintOrder;
     }
 }
