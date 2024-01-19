@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tpAnalitics = new TabPage();
             tpCashier = new TabPage();
             btPrintOrder = new Button();
             lbItems = new ListBox();
@@ -60,16 +59,6 @@
             TabPages.SuspendLayout();
             tpOrders.SuspendLayout();
             SuspendLayout();
-            // 
-            // tpAnalitics
-            // 
-            tpAnalitics.Location = new Point(4, 29);
-            tpAnalitics.Name = "tpAnalitics";
-            tpAnalitics.Padding = new Padding(3);
-            tpAnalitics.Size = new Size(828, 428);
-            tpAnalitics.TabIndex = 1;
-            tpAnalitics.Text = "Analitics";
-            tpAnalitics.UseVisualStyleBackColor = true;
             // 
             // tpCashier
             // 
@@ -299,7 +288,6 @@
             // 
             TabPages.Controls.Add(tpCashier);
             TabPages.Controls.Add(tpOrders);
-            TabPages.Controls.Add(tpAnalitics);
             TabPages.Cursor = Cursors.Hand;
             TabPages.Font = new Font("Segoe UI Symbol", 9.818182F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TabPages.Location = new Point(-4, -1);
@@ -312,6 +300,7 @@
             // 
             // tpOrders
             // 
+            tpOrders.BorderStyle = BorderStyle.Fixed3D;
             tpOrders.Controls.Add(btOrdersDelete);
             tpOrders.Controls.Add(btOrdersView);
             tpOrders.Controls.Add(lbOrders);
@@ -380,8 +369,6 @@
         }
 
         #endregion
-
-        private TabPage tpAnalitics;
         private TabPage tpCashier;
         private TabPage tpOrders;
         private ListBox lbItems;

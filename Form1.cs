@@ -158,5 +158,11 @@ namespace WinFormsApp
             }
 
         }
+
+        private void onAnaliticsLoad(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), new Point(30, 30), new Point(30, 400));
+            e.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), new Point(20, 390), new Point(800, 390));
+        }
     }
 }
