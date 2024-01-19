@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp.Domain
+﻿namespace WinFormsApp.Domain
 {
     internal class Item
     {
@@ -32,6 +25,16 @@ namespace WinFormsApp.Domain
         public override string ToString()
         {
             return $"{Name}  |  {Description}  |  {Price}  |  {Quantity}  |  {TotalPrice}  |  {Date}";
+        }
+
+        public int getTotalPrice()
+        {
+            return TotalPrice;
+        }
+
+        public int getQuantity()
+        {
+            return Quantity;
         }
 
         public void ChangeName(string newName)
@@ -74,11 +77,7 @@ namespace WinFormsApp.Domain
 
         public void ChangeDate(DateTime newOrderDate)
         {
-            if (newOrderDate > DateTime.Today)
-                throw new Exception("Date can't be in the future");
-            else
-                Date = newOrderDate;
+            Date = newOrderDate;
         }
-
     }
 }

@@ -4,7 +4,8 @@ namespace WinFormsApp
 {
     public partial class FormMain : Form
     {
-        List<Item> ItemsList = new List<Item>();
+        private List<Item> ItemsList = new List<Item>();
+        private List<Order> OrdersList = new List<Order>();
         public FormMain()
         {
             InitializeComponent();
@@ -12,8 +13,14 @@ namespace WinFormsApp
 
         private void updateItemsList()
         {
-            Items.DataSource = null;
-            Items.DataSource = ItemsList;
+            lbItems.DataSource = null;
+            lbItems.DataSource = ItemsList;
+        }
+
+        private void updateOrdersList()
+        {
+            lbOrders.DataSource = null;
+            lbOrders.DataSource = OrdersList;
         }
 
         private void onNameChange(object sender, EventArgs e)
@@ -58,8 +65,6 @@ namespace WinFormsApp
                     throw new Exception("Quantity not specified!");
                 if (String.IsNullOrEmpty(tbPricePerUnit.Text))
                     throw new Exception("Price Per Unit is missing!");
-                if (dateTimePicker.Value > DateTime.Today)
-                    throw new Exception("Can't place an ItemsList in the future!");
 
                 var item = new Item(tbName.Text, tbDescription.Text, Int32.Parse(tbPricePerUnit.Text), (int)udQuantity.Value, dateTimePicker.Value);
 
@@ -71,11 +76,14 @@ namespace WinFormsApp
             {
                 MessageBox.Show("Oops!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            if (ItemsList.Count > 0)
+                btPrintOrder.Enabled = true;
         }
         private void onEditItem(object sender, EventArgs e)
         {
-            var index = Items.SelectedIndex;
-            var item = (Item)Items.SelectedItem;
+            var index = lbItems.SelectedIndex;
+            var item = (Item)lbItems.SelectedItem;
 
             try
             {
@@ -98,14 +106,57 @@ namespace WinFormsApp
 
         private void onDeleteButton(object sender, EventArgs e)
         {
-            ItemsList.Remove(ItemsList[Items.SelectedIndex]);
+            ItemsList.Remove(ItemsList[lbItems.SelectedIndex]);
             updateItemsList();
         }
 
         private void onPrintOrder(object sender, EventArgs e)
         {
+            if (lbItems.Items.Count == 0)
+                MessageBox.Show("Order is empty. Please, add some items", "Opps!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                Order order = new Order(ItemsList, dateTimePicker.Value);
+                OrdersList.Add(order);
 
+                updateOrdersList();
+
+                MessageBox.Show("Order has been placed! To view or modify it, go to 'Orders' tab.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
+        private void onOrderView(object sender, MouseEventArgs e)
+        {
+            var selectedItem = (Order)lbOrders.SelectedItem;
+
+            if (lbOrders.SelectedItem == null)
+            {
+                MessageBox.Show("No order selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+                ItemsList = selectedItem.getOrderList();
+
+                updateItemsList();
+
+                TabPages.SelectedTab = TabPages.TabPages["tpCashier"];
+            }
+        }
+
+        private void onOrdersDelete(object sender, EventArgs e)
+        {
+            if (lbOrders.SelectedItem == null)
+            {
+                MessageBox.Show("List is empty!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                var index = lbOrders.SelectedIndex;
+                OrdersList.RemoveAt(index);
+                updateOrdersList();
+            }
+
+        }
     }
 }
