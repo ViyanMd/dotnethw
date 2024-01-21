@@ -63,9 +63,9 @@
             cbHamburger = new CheckBox();
             cbHotDog = new CheckBox();
             gbCheckout = new GroupBox();
-            btCount = new Button();
             lbOrderTotalAmount = new Label();
             lbOrderTotalCurrency = new Label();
+            btCount = new Button();
             gbStation.SuspendLayout();
             gbStationToPay.SuspendLayout();
             gbRadio.SuspendLayout();
@@ -153,19 +153,23 @@
             // 
             // tbInputAmount
             // 
+            tbInputAmount.Enabled = false;
             tbInputAmount.Font = new Font("Microsoft Tai Le", 9.163636F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbInputAmount.Location = new Point(145, 204);
             tbInputAmount.Name = "tbInputAmount";
             tbInputAmount.Size = new Size(84, 25);
             tbInputAmount.TabIndex = 7;
+            tbInputAmount.TextChanged += onAmountChanged;
             // 
             // tbInputLiters
             // 
+            tbInputLiters.Enabled = false;
             tbInputLiters.Font = new Font("Microsoft Tai Le", 9.163636F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbInputLiters.Location = new Point(145, 152);
             tbInputLiters.Name = "tbInputLiters";
             tbInputLiters.Size = new Size(84, 25);
             tbInputLiters.TabIndex = 6;
+            tbInputLiters.TextChanged += onQuantityChanged;
             // 
             // gbRadio
             // 
@@ -185,9 +189,9 @@
             rbAmount.Name = "rbAmount";
             rbAmount.Size = new Size(80, 23);
             rbAmount.TabIndex = 1;
-            rbAmount.TabStop = true;
             rbAmount.Text = "Amount";
             rbAmount.UseVisualStyleBackColor = true;
+            rbAmount.CheckedChanged += onAmountCheckedChanged;
             // 
             // rbQuantity
             // 
@@ -197,9 +201,9 @@
             rbQuantity.Name = "rbQuantity";
             rbQuantity.Size = new Size(83, 23);
             rbQuantity.TabIndex = 0;
-            rbQuantity.TabStop = true;
             rbQuantity.Text = "Quantity";
             rbQuantity.UseVisualStyleBackColor = true;
+            rbQuantity.CheckedChanged += onQuantityCheckedChanged;
             // 
             // tbFuelPrice
             // 
@@ -245,10 +249,13 @@
             // 
             cmFuelType.Font = new Font("Microsoft Tai Le", 9.163636F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cmFuelType.FormattingEnabled = true;
+            cmFuelType.Items.AddRange(new object[] { "95", "92", "80" });
             cmFuelType.Location = new Point(95, 29);
             cmFuelType.Name = "cmFuelType";
             cmFuelType.Size = new Size(134, 26);
-            cmFuelType.TabIndex = 0;
+            cmFuelType.TabIndex = 11;
+            cmFuelType.TabStop = false;
+            cmFuelType.SelectedIndexChanged += onValueChanged;
             // 
             // gbMiniCafe
             // 
@@ -309,6 +316,7 @@
             // 
             // udAmountCocaCola
             // 
+            udAmountCocaCola.Enabled = false;
             udAmountCocaCola.Location = new Point(215, 150);
             udAmountCocaCola.Name = "udAmountCocaCola";
             udAmountCocaCola.Size = new Size(64, 30);
@@ -316,6 +324,7 @@
             // 
             // udAmountFries
             // 
+            udAmountFries.Enabled = false;
             udAmountFries.Location = new Point(215, 117);
             udAmountFries.Name = "udAmountFries";
             udAmountFries.Size = new Size(64, 30);
@@ -323,6 +332,7 @@
             // 
             // udAmountHamburger
             // 
+            udAmountHamburger.Enabled = false;
             udAmountHamburger.Location = new Point(215, 84);
             udAmountHamburger.Name = "udAmountHamburger";
             udAmountHamburger.Size = new Size(64, 30);
@@ -330,6 +340,7 @@
             // 
             // udAmountHotDog
             // 
+            udAmountHotDog.Enabled = false;
             udAmountHotDog.Location = new Point(215, 51);
             udAmountHotDog.Name = "udAmountHotDog";
             udAmountHotDog.Size = new Size(64, 30);
@@ -338,34 +349,42 @@
             // tbPriceCocaCola
             // 
             tbPriceCocaCola.Enabled = false;
+            tbPriceCocaCola.Font = new Font("Microsoft Tai Le", 9.163636F);
             tbPriceCocaCola.Location = new Point(141, 149);
             tbPriceCocaCola.Name = "tbPriceCocaCola";
-            tbPriceCocaCola.Size = new Size(54, 30);
+            tbPriceCocaCola.Size = new Size(54, 25);
             tbPriceCocaCola.TabIndex = 12;
+            tbPriceCocaCola.Text = "12";
             // 
             // tbPriceFries
             // 
             tbPriceFries.Enabled = false;
+            tbPriceFries.Font = new Font("Microsoft Tai Le", 9.163636F);
             tbPriceFries.Location = new Point(141, 116);
             tbPriceFries.Name = "tbPriceFries";
-            tbPriceFries.Size = new Size(54, 30);
+            tbPriceFries.Size = new Size(54, 25);
             tbPriceFries.TabIndex = 11;
+            tbPriceFries.Text = "10";
             // 
             // tbPriceHamburger
             // 
             tbPriceHamburger.Enabled = false;
+            tbPriceHamburger.Font = new Font("Microsoft Tai Le", 9.163636F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbPriceHamburger.Location = new Point(141, 83);
             tbPriceHamburger.Name = "tbPriceHamburger";
-            tbPriceHamburger.Size = new Size(54, 30);
+            tbPriceHamburger.Size = new Size(54, 25);
             tbPriceHamburger.TabIndex = 10;
+            tbPriceHamburger.Text = "50";
             // 
             // tbPriceHotDog
             // 
             tbPriceHotDog.Enabled = false;
+            tbPriceHotDog.Font = new Font("Microsoft Tai Le", 9.163636F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbPriceHotDog.Location = new Point(141, 50);
             tbPriceHotDog.Name = "tbPriceHotDog";
-            tbPriceHotDog.Size = new Size(54, 30);
+            tbPriceHotDog.Size = new Size(54, 25);
             tbPriceHotDog.TabIndex = 9;
+            tbPriceHotDog.Text = "35";
             // 
             // lbCafeQuantity
             // 
@@ -399,6 +418,7 @@
             cbCocaCola.TabIndex = 6;
             cbCocaCola.Text = "Coca-Cola";
             cbCocaCola.UseVisualStyleBackColor = true;
+            cbCocaCola.CheckedChanged += onCocaColaCheckedChanged;
             // 
             // cbFries
             // 
@@ -410,6 +430,7 @@
             cbFries.TabIndex = 5;
             cbFries.Text = "Fries";
             cbFries.UseVisualStyleBackColor = true;
+            cbFries.CheckedChanged += onFriesCheckedChanged;
             // 
             // cbHamburger
             // 
@@ -421,6 +442,7 @@
             cbHamburger.TabIndex = 4;
             cbHamburger.Text = "Hamburger";
             cbHamburger.UseVisualStyleBackColor = true;
+            cbHamburger.CheckedChanged += onHamburgerCheckedChanged;
             // 
             // cbHotDog
             // 
@@ -432,6 +454,7 @@
             cbHotDog.TabIndex = 3;
             cbHotDog.Text = "Hot-Dog";
             cbHotDog.UseVisualStyleBackColor = true;
+            cbHotDog.CheckedChanged += onHDCheckedChanged;
             // 
             // gbCheckout
             // 
@@ -446,18 +469,6 @@
             gbCheckout.TabIndex = 2;
             gbCheckout.TabStop = false;
             gbCheckout.Text = "Checkout";
-            // 
-            // btCount
-            // 
-            btCount.BackColor = SystemColors.GradientActiveCaption;
-            btCount.FlatAppearance.BorderSize = 0;
-            btCount.FlatStyle = FlatStyle.Flat;
-            btCount.Location = new Point(6, 29);
-            btCount.Name = "btCount";
-            btCount.Size = new Size(183, 94);
-            btCount.TabIndex = 0;
-            btCount.Text = "COUNT";
-            btCount.UseVisualStyleBackColor = false;
             // 
             // lbOrderTotalAmount
             // 
@@ -479,6 +490,19 @@
             lbOrderTotalCurrency.TabIndex = 13;
             lbOrderTotalCurrency.Text = "UAH";
             // 
+            // btCount
+            // 
+            btCount.BackColor = SystemColors.GradientActiveCaption;
+            btCount.FlatAppearance.BorderSize = 0;
+            btCount.FlatStyle = FlatStyle.Flat;
+            btCount.Location = new Point(6, 29);
+            btCount.Name = "btCount";
+            btCount.Size = new Size(183, 94);
+            btCount.TabIndex = 0;
+            btCount.Text = "COUNT";
+            btCount.UseVisualStyleBackColor = false;
+            btCount.Click += onCount;
+            // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
@@ -490,6 +514,8 @@
             Controls.Add(gbStation);
             Name = "FormMain";
             Text = "BestOil";
+            FormClosing += onFormClosing;
+            Load += onMainFormLoad;
             gbStation.ResumeLayout(false);
             gbStation.PerformLayout();
             gbStationToPay.ResumeLayout(false);
