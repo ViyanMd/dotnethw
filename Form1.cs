@@ -6,5 +6,15 @@ namespace WinFormsApp
         {
             InitializeComponent();
         }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbCafeQuantity_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
