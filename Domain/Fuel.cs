@@ -1,39 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp.Domain
+﻿namespace WinFormsApp.Domain
 {
+    internal class FuelCollection
+    {
+        public Dictionary<string, Fuel> fuelsList;
+
+        public FuelCollection()
+        {
+            fuelsList = new Dictionary<string, Fuel>();
+        }
+
+        public void AddFuel(Fuel fuel)
+        {
+            fuelsList.Add(fuel.GetType(), fuel);
+        }
+
+        public void RemoveFuel(Fuel fuel)
+        {
+            fuelsList.Remove(fuel.GetType());
+        }
+    }
+
     internal class Fuel
     {
-        private Dictionary<string, double> FuelCollection;
+        public string Type { get; private set; }
+        public double Price { get; private set; }
 
-        public Fuel() 
+        public Fuel(string type, double price)
         {
-            FuelCollection = new Dictionary<string, double>();
-        }
-        
-        public void Add(string key, double value)
-        {
-            FuelCollection.Add(key, value);
+            Type = type;
+            Price = price;
         }
 
-        public void Remove(string key)
+        public void UpdatePrice(double newPrice)
         {
-            FuelCollection.Remove(key);
+            Price = newPrice;
         }
 
-        public void ChangeValue(string key, double value)
+        public string GetType()
         {
-            FuelCollection.Remove(key);
-            FuelCollection.Add(key, value);
+            return Type;
         }
 
-        public double GetPrice(string key)
+        public double GetPrice()
         {
-            return FuelCollection[key];
+            return Price;
         }
     }
 }

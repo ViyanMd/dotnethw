@@ -8,7 +8,7 @@ namespace WinFormsApp.Domain
 {
     internal class Order
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
         public double TotalAmount { get; set; }
         public Order(double totalAmount) 
         {

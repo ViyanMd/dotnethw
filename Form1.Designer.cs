@@ -115,7 +115,7 @@
             // 
             lbStationTotalAmount.AutoSize = true;
             lbStationTotalAmount.Font = new Font("Microsoft Tai Le", 20.2909088F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbStationTotalAmount.Location = new Point(89, 39);
+            lbStationTotalAmount.Location = new Point(54, 39);
             lbStationTotalAmount.Name = "lbStationTotalAmount";
             lbStationTotalAmount.Size = new Size(79, 40);
             lbStationTotalAmount.TabIndex = 12;
@@ -255,7 +255,7 @@
             cmFuelType.Size = new Size(134, 26);
             cmFuelType.TabIndex = 11;
             cmFuelType.TabStop = false;
-            cmFuelType.SelectedIndexChanged += onValueChanged;
+            cmFuelType.SelectedIndexChanged += onFuelTypeValueChanged;
             // 
             // gbMiniCafe
             // 
@@ -298,7 +298,7 @@
             // 
             lbCafeTotalAmount.AutoSize = true;
             lbCafeTotalAmount.Font = new Font("Microsoft Tai Le", 20.2909088F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbCafeTotalAmount.Location = new Point(89, 39);
+            lbCafeTotalAmount.Location = new Point(52, 39);
             lbCafeTotalAmount.Name = "lbCafeTotalAmount";
             lbCafeTotalAmount.Size = new Size(79, 40);
             lbCafeTotalAmount.TabIndex = 12;
@@ -321,6 +321,7 @@
             udAmountCocaCola.Name = "udAmountCocaCola";
             udAmountCocaCola.Size = new Size(64, 30);
             udAmountCocaCola.TabIndex = 16;
+            udAmountCocaCola.ValueChanged += onCocaColaQuantityChanged;
             // 
             // udAmountFries
             // 
@@ -329,6 +330,7 @@
             udAmountFries.Name = "udAmountFries";
             udAmountFries.Size = new Size(64, 30);
             udAmountFries.TabIndex = 15;
+            udAmountFries.ValueChanged += onFriesQuantityChanged;
             // 
             // udAmountHamburger
             // 
@@ -337,14 +339,16 @@
             udAmountHamburger.Name = "udAmountHamburger";
             udAmountHamburger.Size = new Size(64, 30);
             udAmountHamburger.TabIndex = 14;
+            udAmountHamburger.ValueChanged += onHamburgerQuantityChanged;
             // 
             // udAmountHotDog
             // 
             udAmountHotDog.Enabled = false;
-            udAmountHotDog.Location = new Point(215, 51);
+            udAmountHotDog.Location = new Point(215, 50);
             udAmountHotDog.Name = "udAmountHotDog";
             udAmountHotDog.Size = new Size(64, 30);
             udAmountHotDog.TabIndex = 13;
+            udAmountHotDog.ValueChanged += onHotDogQuantityChanged;
             // 
             // tbPriceCocaCola
             // 
@@ -395,7 +399,6 @@
             lbCafeQuantity.Size = new Size(53, 16);
             lbCafeQuantity.TabIndex = 8;
             lbCafeQuantity.Text = "Quantity";
-            lbCafeQuantity.Click += lbCafeQuantity_Click;
             // 
             // lbCafePrices
             // 
@@ -406,7 +409,6 @@
             lbCafePrices.Size = new Size(33, 16);
             lbCafePrices.TabIndex = 7;
             lbCafePrices.Text = "Price";
-            lbCafePrices.Click += label4_Click;
             // 
             // cbCocaCola
             // 
@@ -474,7 +476,7 @@
             // 
             lbOrderTotalAmount.AutoSize = true;
             lbOrderTotalAmount.Font = new Font("Microsoft Tai Le", 20.2909088F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lbOrderTotalAmount.Location = new Point(333, 53);
+            lbOrderTotalAmount.Location = new Point(315, 53);
             lbOrderTotalAmount.Name = "lbOrderTotalAmount";
             lbOrderTotalAmount.Size = new Size(79, 40);
             lbOrderTotalAmount.TabIndex = 14;

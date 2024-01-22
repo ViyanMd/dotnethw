@@ -4,41 +4,55 @@ namespace WinFormsApp
 {
     public partial class FormMain : Form
     {
-        Fuel fuel = new Fuel();
-        double stationTotal = 0.00;
-        double cafeTotal = 0.00;
-        List<Order> AllOrders = new List<Order>();
+        FuelCollection fuels = new FuelCollection();
+        List<Order> sessionOrders = new List<Order>();
         public FormMain()
         {
             InitializeComponent();
         }
+        private void updateFuelPrice()
+        {
+            Fuel selectedFuel = fuels.fuelsList[cmFuelType.SelectedItem.ToString()];
+            tbFuelPrice.Text = selectedFuel.GetPrice().ToString("F2");
+        }
+
+        private void updateStationTotalAmount(string amount)
+        {
+            lbStationTotalAmount.Text = amount;
+            lbOrderTotalAmount.Text = (Double.Parse(lbStationTotalAmount.Text) + Double.Parse(lbCafeTotalAmount.Text)).ToString("F2");
+        }
+        private void updateCafeTotalAmount()
+        {
+            var hotdogAmount = udAmountHotDog.Value;
+            var hamburgerAmount = udAmountHamburger.Value;
+            var friesAmount = udAmountFries.Value;
+            var cocaColaAmount = udAmountCocaCola.Value;
+
+            var totalCafeAmount = hotdogAmount * 35 + hamburgerAmount * 50 + friesAmount * 10 + cocaColaAmount * 12;
+
+            lbCafeTotalAmount.Text = totalCafeAmount.ToString("F2");
+            lbOrderTotalAmount.Text = (Double.Parse(lbStationTotalAmount.Text) + Double.Parse(lbCafeTotalAmount.Text)).ToString("F2");
+        }
         private void onMainFormLoad(object sender, EventArgs e)
         {
-            fuel.Add("95", 25.00);
-            fuel.Add("92", 23.00);
-            fuel.Add("80", 20.00);
+            var fuelTypes = new List<string>();
 
-            cmFuelType.SelectedIndex = 0;
-            var selectedItem = cmFuelType.SelectedItem.ToString();
-            tbFuelPrice.Text = fuel.GetPrice(selectedItem).ToString();
+            fuels.AddFuel(new Fuel("98", 30.00));
+            fuels.AddFuel(new Fuel("95", 25.60));
+            fuels.AddFuel(new Fuel("92", 22.90));
+            fuels.AddFuel(new Fuel("80", 25.00));
+
+            foreach (string fuelType in fuels.fuelsList.Keys)
+                fuelTypes.Add(fuelType);
+
+            cmFuelType.DataSource = fuelTypes;
+            cmFuelType.Update();
+
+            updateFuelPrice();
         }
-        private void label4_Click(object sender, EventArgs e)
+        private void onFuelTypeValueChanged(object sender, EventArgs e)
         {
-
-        }
-        private void lbCafeQuantity_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void onValueChanged(object sender, EventArgs e)
-        {
-            var selectedItemPrice = fuel.GetPrice(cmFuelType.SelectedItem.ToString());
-
-            if (String.IsNullOrEmpty(selectedItemPrice.ToString()))
-                MessageBox.Show("Fuel type is wrong!", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
-                tbFuelPrice.Text = selectedItemPrice.ToString();
-
+            updateFuelPrice();
         }
 
         private void onQuantityCheckedChanged(object sender, EventArgs e)
@@ -60,16 +74,32 @@ namespace WinFormsApp
         }
         private void onQuantityChanged(object sender, EventArgs e)
         {
-            var fuelPrice = Double.Parse(tbFuelPrice.Text);
-            var liters = Double.Parse(tbInputLiters.Text);
-            lbStationTotalAmount.Text = (fuelPrice * liters).ToString();
+            if (String.IsNullOrEmpty(tbInputLiters.Text))
+            {
+                MessageBox.Show("Can't be empty!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbInputLiters.Text = "0.00";
+            }
+            else
+            {
+                var fuelPrice = Double.Parse(tbFuelPrice.Text);
+                var liters = Double.Parse(tbInputLiters.Text);
+                updateStationTotalAmount((fuelPrice * liters).ToString("F2"));
+            }
         }
         private void onAmountChanged(object sender, EventArgs e)
         {
-            var totalAmount = Double.Parse(tbInputAmount.Text);
-            var pricePerLiter = Double.Parse(tbFuelPrice.Text);
-            tbInputLiters.Text = (totalAmount / pricePerLiter).ToString();
-            lbStationTotalAmount.Text = totalAmount.ToString("F2");
+            if (String.IsNullOrEmpty(tbInputAmount.Text))
+            {
+                MessageBox.Show("Can't be empty!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbInputAmount.Text = "0.00";
+            }
+            else
+            {
+                var totalAmount = Double.Parse(tbInputAmount.Text);
+                var pricePerLiter = Double.Parse(tbFuelPrice.Text);
+                tbInputLiters.Text = (totalAmount / pricePerLiter).ToString("F2");
+                updateStationTotalAmount(totalAmount.ToString("F2"));
+            }
         }
 
         private void onFriesCheckedChanged(object sender, EventArgs e)
@@ -104,29 +134,87 @@ namespace WinFormsApp
             else
                 udAmountCocaCola.Enabled = false;
         }
+        private void onHotDogQuantityChanged(object sender, EventArgs e)
+        {
+            var hotdogQuantity = udAmountHotDog.Value;
 
+            if (hotdogQuantity < 0)
+            {
+                MessageBox.Show("Field can't be less than 0!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                udAmountHotDog.Value = 0;
+            }
+            else
+            {
+                updateCafeTotalAmount();
+            }
+        }
+        private void onHamburgerQuantityChanged(object sender, EventArgs e)
+        {
+            var hamburgerQuantity = udAmountHamburger.Value;
 
+            if (hamburgerQuantity < 0)
+            {
+                MessageBox.Show("Field can't be less than 0!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                udAmountHamburger.Value = 0;
+            }
+            else
+            {
+                updateCafeTotalAmount();
+            }
+        }
+        private void onFriesQuantityChanged(object sender, EventArgs e)
+        {
+            var friesQuantity = udAmountFries.Value;
+
+            if (friesQuantity < 0)
+            {
+                MessageBox.Show("Field can't be less than 0!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                udAmountFries.Value = 0;
+            }
+            else
+            {
+                updateCafeTotalAmount();
+            }
+        }
+        private void onCocaColaQuantityChanged(object sender, EventArgs e)
+        {
+            var cocaColaQuantity = udAmountCocaCola.Value;
+
+            if (cocaColaQuantity < 0)
+            {
+                MessageBox.Show("Field can't be less than 0!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                udAmountCocaCola.Value = 0;
+            }
+            else
+            {
+                updateCafeTotalAmount();
+            }
+        }
         private void onCount(object sender, EventArgs e)
         {
-            stationTotal = Double.Parse(lbStationTotalAmount.Text);
+            var stationTotal = Double.Parse(lbCafeTotalAmount.Text);
+            var cafeTotal = Double.Parse(lbStationTotalAmount.Text);
 
-            cafeTotal += Double.Parse(udAmountHotDog.Value.ToString()) * Double.Parse(tbPriceHotDog.Text);
-            cafeTotal += Double.Parse(udAmountHamburger.Value.ToString()) * Double.Parse(tbPriceHamburger.Text);
-            cafeTotal += Double.Parse(udAmountFries.Value.ToString()) * Double.Parse(tbPriceFries.Text);
-            cafeTotal += Double.Parse(udAmountCocaCola.Value.ToString()) * Double.Parse(tbPriceCocaCola.Text);
+            if(stationTotal <= 0 && cafeTotal <= 0)
+            {
+                MessageBox.Show("Order is empty!\nPlease, add some items.", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else
+            {
+                var newOrder = new Order(stationTotal + cafeTotal);
+                sessionOrders.Add(newOrder);
 
-            AllOrders.Add(new Order(stationTotal + cafeTotal));
-
-            MessageBox.Show($"Success! Total is {stationTotal}");
+                MessageBox.Show("Order added successfully!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
-
         private void onFormClosing(object sender, FormClosingEventArgs e)
         {
             var totalForSession = 0.0;
-            foreach (var item in AllOrders)
+            foreach (var item in sessionOrders)
                 totalForSession += item.TotalAmount;
 
             MessageBox.Show($"Total income: {totalForSession}", "Bye!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+
     }
 }
