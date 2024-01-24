@@ -17,7 +17,7 @@ namespace WinFormsApp.Domain
         public string? _email { get; set; }
         public bool _isAdmin { get; set; }
 
-        public User(string firstName, string lastName, string username, string password, DateTime dateOfBirth, string email = "") 
+        public User(string firstName, string lastName, string username, string password, DateTime dateOfBirth, string email = "")
         {
             _firstName = firstName;
             _lastName = lastName;
@@ -26,9 +26,11 @@ namespace WinFormsApp.Domain
             _dateOfBirth = dateOfBirth;
             _age = DateTime.Now.Year - dateOfBirth.Year;
             _email = email;
-            _isAdmin = false;
+            _isAdmin = true;
         }
-
-
+        public override string ToString()
+        {
+            return $"Name: {_firstName} {_lastName}  |  Username: {_username}  |  Age: {_age}, Email: {_email}";
+        }
     }
 }

@@ -124,6 +124,7 @@
             Name = "fLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Start Page";
+            Load += onStartPageLoad;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -33,6 +33,7 @@ namespace WinFormsApp
 
                 var newUser = new User(tbRegisterFirstName.Text, tbRegisterLastName.Text, tbRegisterUserName.Text, tbRegisterPassword.Text, dtpRegisterAge.Value, tbRegisterEmail.Text);
                 UserCollection._data.Add(newUser._username, newUser);
+                this.Close();
             }
             catch (Exception ex) 
             {
