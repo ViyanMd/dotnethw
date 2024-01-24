@@ -26,14 +26,12 @@ namespace WinFormsApp
         {
             lbUsers = null;
             lbUsers.DataSource = UserCollection.ToList();
-            lbUsers.Update();
         }
 
         private void updateBookCollection()
         {
             lbBooksCollection = null;
             lbBooksCollection.DataSource = BookCollection.ToList();
-            lbBooksCollection.Update();
         }
         private void onAdminAddBook(object sender, EventArgs e)
         {

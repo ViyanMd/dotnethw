@@ -206,6 +206,7 @@
             // cbNBGenre
             // 
             cbNBGenre.FormattingEnabled = true;
+            cbNBGenre.Items.AddRange(new object[] { "Fiction", "Non-Fiction", "Romance", "Thriller", "Fantasy", "Horror", "Poetry", "Children", "Historical", "Finance", "Biography" });
             cbNBGenre.Location = new Point(144, 156);
             cbNBGenre.Margin = new Padding(6);
             cbNBGenre.Name = "cbNBGenre";

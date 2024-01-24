@@ -18,9 +18,9 @@ namespace WinFormsApp.Domain
 
             if (_data.Values.Count != 0)
             {
-                foreach (var book in _data.Values)
+                foreach (var user in _data.Values)
                 {
-                    listOfUsers.Add(book);
+                    listOfUsers.Add(user);
                 }
             }
             else
