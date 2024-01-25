@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp.DB;
 using WinFormsApp.Domain;
 
 namespace WinFormsApp
@@ -32,7 +33,7 @@ namespace WinFormsApp
                 if (DateTime.Now.Year - dtpRegisterAge.Value.Year < 12) throw new Exception("You have to be older than 12!");
 
                 var newUser = new User(tbRegisterFirstName.Text, tbRegisterLastName.Text, tbRegisterUserName.Text, tbRegisterPassword.Text, dtpRegisterAge.Value, tbRegisterEmail.Text);
-                UserCollection._data.Add(newUser._username, newUser);
+                UsersDB.AddUser(newUser);
                 this.Close();
             }
             catch (Exception ex) 

@@ -1,3 +1,4 @@
+using WinFormsApp.DB;
 using WinFormsApp.Domain;
 
 namespace WinFormsApp
@@ -12,27 +13,27 @@ namespace WinFormsApp
         }
         private void onStartPageLoad(object sender, EventArgs e)
         {
+            //UsersDB.Load();
         }
         private void onLogInClicked(object sender, EventArgs e)
         {
             var username = tbUsername.Text;
             var userPass = tbPassword.Text;
 
-            if (UserCollection._data.TryGetValue(username, out User libUser))
+            var libUser = UsersDB.AuthorizeUser(username, userPass);
+
+            if (libUser != null)
             {
-                if (libUser._password == userPass)
+                activeUser = libUser;
+                if (libUser._isAdmin)
                 {
-                    if (libUser._isAdmin)
-                    {
-                        var adminPanel = new AdminPanel();
-                        adminPanel.ShowDialog();
-                    }
-                    else
-                    {
-                        var library = new Library();
-                        library.ShowDialog();
-                    }
-                    activeUser = libUser;
+                    var adminPanel = new AdminPanel();
+                    adminPanel.ShowDialog();
+                }
+                else
+                {
+                    var library = new Library();
+                    library.ShowDialog();
                 }
             }
             else

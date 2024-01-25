@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp.Domain
 {
-    internal class User
+    [Serializable]
+    public class User
     {
         public string _firstName { get; set; }
         public string _lastName { get; set; }
@@ -17,6 +18,17 @@ namespace WinFormsApp.Domain
         public string? _email { get; set; }
         public bool _isAdmin { get; set; }
 
+        public User() 
+        {
+            _firstName = string.Empty;
+            _lastName = string.Empty;   
+            _username = string.Empty;
+            _password = string.Empty;
+            _dateOfBirth = DateTime.MinValue;
+            _age = 0;
+            _email = string.Empty;
+            _isAdmin = false;
+        }
         public User(string firstName, string lastName, string username, string password, DateTime dateOfBirth, string email = "")
         {
             _firstName = firstName;
