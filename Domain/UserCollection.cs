@@ -12,6 +12,18 @@ namespace WinFormsApp.Domain
 
         public static Dictionary<string, User> _data = new Dictionary<string, User>();
 
+        public static User AuthorizeUser(string username, string pass)
+        {
+            User authorizedUser;
+
+            if (_data.TryGetValue(username, out authorizedUser))
+                if (authorizedUser._password == pass)
+                    return authorizedUser;
+                else
+                    return null;
+
+            return null;
+        }
         public static List<User> ToList()
         {
             var listOfUsers = new List<User>();

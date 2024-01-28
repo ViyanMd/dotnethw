@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace WinFormsApp.Domain
 {
     [Serializable]
@@ -17,6 +12,7 @@ namespace WinFormsApp.Domain
         public int _age { get; set; }
         public string? _email { get; set; }
         public bool _isAdmin { get; set; }
+        public List<Book> _rentedBooks { get; set; }
 
         public User() 
         {
@@ -28,21 +24,23 @@ namespace WinFormsApp.Domain
             _age = 0;
             _email = string.Empty;
             _isAdmin = false;
+            _rentedBooks = new List<Book>();
         }
         public User(string firstName, string lastName, string username, string password, DateTime dateOfBirth, string email = "")
         {
-            _firstName = firstName;
-            _lastName = lastName;
-            _username = username;
-            _password = password;
+            _firstName = firstName.Trim();
+            _lastName = lastName.Trim();
+            _username = username.Trim();
+            _password = password.Trim();
             _dateOfBirth = dateOfBirth;
             _age = DateTime.Now.Year - dateOfBirth.Year;
-            _email = email;
-            _isAdmin = true;
+            _email = email.Trim();
+            _isAdmin = false;
+            _rentedBooks = new List<Book>();
         }
         public override string ToString()
         {
-            return $"Name: {_firstName} {_lastName}  |  Username: {_username}  |  Age: {_age}, Email: {_email}";
+            return $"Name: {_firstName} {_lastName}  |  Username: {_username}  |  Age: {_age}  |  Email: {_email}  |  Rented Books: {_rentedBooks.Count}";
         }
     }
 }

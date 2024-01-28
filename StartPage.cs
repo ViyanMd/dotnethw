@@ -5,36 +5,37 @@ namespace WinFormsApp
 {
     public partial class fLogin : Form
     {
-
-        static private User activeUser;
         public fLogin()
         {
             InitializeComponent();
         }
         private void onStartPageLoad(object sender, EventArgs e)
         {
-            //UsersDB.Load();
+            UsersDB.Load();
+            BooksDB.Load();
         }
         private void onLogInClicked(object sender, EventArgs e)
         {
             var username = tbUsername.Text;
             var userPass = tbPassword.Text;
 
-            var libUser = UsersDB.AuthorizeUser(username, userPass);
+            var libUser = UserCollection.AuthorizeUser(username, userPass);
 
             if (libUser != null)
             {
-                activeUser = libUser;
+                ActiveUser.Set(libUser);
                 if (libUser._isAdmin)
                 {
-                    var adminPanel = new AdminPanel();
+                    var adminPanel = new AdminPanel(this);
                     adminPanel.ShowDialog();
                 }
                 else
                 {
-                    var library = new Library();
+                    var library = new Library(this);
                     library.ShowDialog();
                 }
+
+                this.Close();
             }
             else
             {

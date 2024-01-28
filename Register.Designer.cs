@@ -101,35 +101,35 @@
             dtpRegisterAge.Location = new Point(371, 303);
             dtpRegisterAge.Name = "dtpRegisterAge";
             dtpRegisterAge.Size = new Size(229, 26);
-            dtpRegisterAge.TabIndex = 5;
+            dtpRegisterAge.TabIndex = 7;
             // 
             // tbRegisterFirstName
             // 
             tbRegisterFirstName.Location = new Point(371, 111);
             tbRegisterFirstName.Name = "tbRegisterFirstName";
             tbRegisterFirstName.Size = new Size(229, 26);
-            tbRegisterFirstName.TabIndex = 6;
+            tbRegisterFirstName.TabIndex = 1;
             // 
             // tbRegisterLastName
             // 
             tbRegisterLastName.Location = new Point(371, 143);
             tbRegisterLastName.Name = "tbRegisterLastName";
             tbRegisterLastName.Size = new Size(229, 26);
-            tbRegisterLastName.TabIndex = 7;
+            tbRegisterLastName.TabIndex = 2;
             // 
             // tbRegisterUserName
             // 
             tbRegisterUserName.Location = new Point(371, 175);
             tbRegisterUserName.Name = "tbRegisterUserName";
             tbRegisterUserName.Size = new Size(229, 26);
-            tbRegisterUserName.TabIndex = 8;
+            tbRegisterUserName.TabIndex = 3;
             // 
             // tbRegisterEmail
             // 
             tbRegisterEmail.Location = new Point(371, 271);
             tbRegisterEmail.Name = "tbRegisterEmail";
             tbRegisterEmail.Size = new Size(229, 26);
-            tbRegisterEmail.TabIndex = 9;
+            tbRegisterEmail.TabIndex = 6;
             // 
             // btRegister
             // 
@@ -137,7 +137,7 @@
             btRegister.Location = new Point(413, 351);
             btRegister.Name = "btRegister";
             btRegister.Size = new Size(187, 30);
-            btRegister.TabIndex = 10;
+            btRegister.TabIndex = 8;
             btRegister.Text = "Register";
             btRegister.UseVisualStyleBackColor = true;
             btRegister.Click += onRegister;
@@ -148,7 +148,7 @@
             linkHaveAnAccount.Location = new Point(282, 426);
             linkHaveAnAccount.Name = "linkHaveAnAccount";
             linkHaveAnAccount.Size = new Size(235, 19);
-            linkHaveAnAccount.TabIndex = 11;
+            linkHaveAnAccount.TabIndex = 9;
             linkHaveAnAccount.TabStop = true;
             linkHaveAnAccount.Text = "Already have an account ? Click here.";
             linkHaveAnAccount.MouseClick += onHaveAnAccountClick;
@@ -157,15 +157,17 @@
             // 
             tbRegisterRepeatPassword.Location = new Point(371, 239);
             tbRegisterRepeatPassword.Name = "tbRegisterRepeatPassword";
+            tbRegisterRepeatPassword.PasswordChar = '*';
             tbRegisterRepeatPassword.Size = new Size(229, 26);
-            tbRegisterRepeatPassword.TabIndex = 15;
+            tbRegisterRepeatPassword.TabIndex = 5;
             // 
             // tbRegisterPassword
             // 
             tbRegisterPassword.Location = new Point(371, 207);
             tbRegisterPassword.Name = "tbRegisterPassword";
+            tbRegisterPassword.PasswordChar = '*';
             tbRegisterPassword.Size = new Size(229, 26);
-            tbRegisterPassword.TabIndex = 14;
+            tbRegisterPassword.TabIndex = 4;
             // 
             // lbRegisterRepeatPassword
             // 

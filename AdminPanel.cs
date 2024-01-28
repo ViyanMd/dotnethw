@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
+using WinFormsApp.DB;
 using WinFormsApp.Domain;
 
 namespace WinFormsApp
 {
     public partial class AdminPanel : Form
     {
-        public AdminPanel()
+        private Form _form;
+        public AdminPanel(Form form)
         {
             InitializeComponent();
+            _form = form;
+            _form.Hide();
         }
         private void onAdminPanelLoad(object sender, EventArgs e)
         {
@@ -24,14 +20,14 @@ namespace WinFormsApp
         }
         private void updateUsersCollection()
         {
-            lbUsers = null;
-            lbUsers.DataSource = UserCollection.ToList();
+            lbUsers.DataSource = null;
+            lbUsers.DataSource = UserCollection._data.Values.ToList();
         }
 
         private void updateBookCollection()
         {
-            lbBooksCollection = null;
-            lbBooksCollection.DataSource = BookCollection.ToList();
+            lbBooksCollection.DataSource = null;
+            lbBooksCollection.DataSource = BookCollection._data.Values.ToList();
         }
         private void onAdminAddBook(object sender, EventArgs e)
         {
@@ -51,6 +47,18 @@ namespace WinFormsApp
             {
                 MessageBox.Show(ex.Message, "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void onAdminPanelClosing(object sender, FormClosingEventArgs e)
+        {
+            UsersDB.Save();
+            BooksDB.Save();
+        }
+
+        private void onDeleteUser(object sender, EventArgs e)
+        {
+            UserCollection._data.Remove(((User)lbUsers.SelectedItem)._username);
+            updateUsersCollection();
         }
     }
 }

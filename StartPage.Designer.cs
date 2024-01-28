@@ -70,6 +70,7 @@
             tbPassword.Font = new Font("Century Gothic", 9.163636F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbPassword.Location = new Point(205, 119);
             tbPassword.Name = "tbPassword";
+            tbPassword.PasswordChar = '*';
             tbPassword.Size = new Size(187, 25);
             tbPassword.TabIndex = 3;
             // 

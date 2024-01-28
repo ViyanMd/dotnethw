@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using WinFormsApp.DB;
+﻿
 using WinFormsApp.Domain;
 
 namespace WinFormsApp
@@ -33,7 +24,8 @@ namespace WinFormsApp
                 if (DateTime.Now.Year - dtpRegisterAge.Value.Year < 12) throw new Exception("You have to be older than 12!");
 
                 var newUser = new User(tbRegisterFirstName.Text, tbRegisterLastName.Text, tbRegisterUserName.Text, tbRegisterPassword.Text, dtpRegisterAge.Value, tbRegisterEmail.Text);
-                UsersDB.AddUser(newUser);
+                UserCollection._data.Add(newUser._username, newUser);
+                MessageBox.Show("You've been registered! You can log in now!", "Success");
                 this.Close();
             }
             catch (Exception ex) 
